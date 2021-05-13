@@ -41,7 +41,7 @@ const Header = props => {
   const {user} = useSelector(state => state.user);
   const {logoutUser} = useAppActions();
   const handleClick = () => {
-    logoutUser(props.history);
+    logoutUser();
   }
   
   return(

@@ -1,6 +1,7 @@
 import {http} from "../../http";
+import history from '../../history'
 
-export const loginUser = (user, history) => {
+export const loginUser = (user) => {
   return async dispatch => {
     try {
       dispatch({type: 'LOGIN_USER'});
@@ -16,6 +17,7 @@ export const loginUser = (user, history) => {
           type: 'LOGIN_USER_SUCCESS',
           payload: user
         });
+        console.log(history);
         history.push('/');
       } 
       else {
@@ -31,7 +33,7 @@ export const loginUser = (user, history) => {
   }
 }
 
-export const logoutUser = history => {
+export const logoutUser = () => {
   return dispatch => {
     localStorage.removeItem('user');
     dispatch({

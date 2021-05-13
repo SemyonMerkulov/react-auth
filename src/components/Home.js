@@ -3,28 +3,29 @@ import {useSelector} from "react-redux"
 import {useAppActions} from '../hooks';
 import Header from "./Header";
 import PostItem from "./PostItem";
-import styled from 'styled-components'
+import styled from 'styled-components';
+import history from '../history';
 
 const Container = styled.div`
   margin: 0 auto;
   max-width: 960px;
 `;
 
-const Home = (props) => {
+const Home = () => {
   const {posts} = useSelector(state => state.post);
   const {fetchPosts} = useAppActions();
 
 
   useEffect(() => {
     if (!localStorage.getItem("user")) {
-      props.history.push('/auth');
+      history.push('/auth');
     }
     fetchPosts();
   }, []);
 
   return(
     <div>
-      <Header history={props.history}/>
+      <Header/>
       <Container>
        {posts.map((item, index) => {
         return(

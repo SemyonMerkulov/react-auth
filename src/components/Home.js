@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import {useSelector} from "react-redux"
 import {useAppActions} from '../hooks';
+import Header from "./Header";
 import PostItem from "./PostItem";
 import styled from 'styled-components'
 
@@ -23,6 +24,7 @@ const Home = (props) => {
 
   return(
     <div>
+      <Header/>
       <Container>
        {posts.map((item, index) => {
         return(

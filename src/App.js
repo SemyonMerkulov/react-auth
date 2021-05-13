@@ -8,7 +8,6 @@ function App() {
     <Router>
       <Switch>
         <Route path="/auth" component={Auth}>
-          <Auth/>
         </Route>
         <Route path="/" component={Home}>
         </Route>

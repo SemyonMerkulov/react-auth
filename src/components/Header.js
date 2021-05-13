@@ -1,5 +1,7 @@
 import styled from 'styled-components'
+import {useSelector} from "react-redux"
 import { FiLogOut, FiUser } from 'react-icons/fi';
+import {useAppActions} from '../hooks';
 
 
 const ButtonLogout = styled.button`
@@ -10,6 +12,11 @@ const ButtonLogout = styled.button`
 `;
 
 const Container = styled.div`
+  margin: 0 auto;
+  max-width: 960px;
+`;
+
+const Wrapper = styled.div`
   background: white;
   width: 100%;
 `;
@@ -17,7 +24,7 @@ const Container = styled.div`
 const Inner = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding: 5px 10px;
+  padding: 5px 0;
 `;
 
 const IconContainer = styled.div`
@@ -30,21 +37,29 @@ const UserTitle = styled.span`
   padding: 0 7px;
 `;
 
-const Header = () => {
+const Header = props => {
+  const {user} = useSelector(state => state.user);
+  const {logoutUser} = useAppActions();
+  const handleClick = () => {
+    logoutUser(props.history);
+  }
+  
   return(
-    <Container>
-      <Inner>
-        <IconContainer>
-          <FiUser/>
-        </IconContainer>
-        <UserTitle>
-          admin
-        </UserTitle>
-        <ButtonLogout>
-          <FiLogOut/>
-        </ButtonLogout>
-      </Inner>
-    </Container>
+    <Wrapper>
+      <Container>
+        <Inner>
+          <IconContainer>
+            <FiUser/>
+          </IconContainer>
+          <UserTitle>
+            {user.name}
+          </UserTitle>
+          <ButtonLogout onClick={handleClick}>
+            <FiLogOut/>
+          </ButtonLogout>
+        </Inner>
+      </Container>
+    </Wrapper>  
   );
 }
 

@@ -16,11 +16,11 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const Auth = () => {
+const Auth = props => {
   return(
     <Wrapper>
       <Inner>
-        <Form/>
+        <Form history={props.history}/>
       </Inner>
     </Wrapper>
   );

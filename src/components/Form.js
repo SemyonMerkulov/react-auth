@@ -1,4 +1,6 @@
 import React, {useState} from "react";
+import {useAppActions} from '../hooks';
+import {useSelector} from "react-redux"
 import styled from 'styled-components'
 
 const FormGroup = styled.div`
@@ -26,6 +28,13 @@ const FormControl = styled.input`
   }
 `;
 
+const ErrorText = styled.label`
+  color: red;
+  display: inline-block;
+  font-size: .9rem;
+  margin-top: 10px;
+`;
+
 const Label = styled.label`
   display: inline-block;
   margin-bottom: .5rem;
@@ -47,19 +56,26 @@ const SubmitButton = styled.button`
   }
 `;
 
-const Form = () => {
+const Form = props => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const {loginUser} = useAppActions();
+
+  const {error} = useSelector(state => state.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    loginUser({
+      name: username, 
+      password: password
+    }, props.history);
   }
 
 
   return(
     <form onSubmit={handleSubmit}>
       <FormGroup>
-        <Label htmlFor="username">Username:</Label>
+        <Label htmlFor="username">Name:</Label>
         <FormControl 
           type="text" 
           className="form-control" 
@@ -79,6 +95,7 @@ const Form = () => {
         />
       </FormGroup>
       <SubmitButton type="submit">Submit</SubmitButton>
+      <ErrorText>{error}</ErrorText>
     </form>
   );
 }

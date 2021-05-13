@@ -24,7 +24,7 @@ const Home = (props) => {
 
   return(
     <div>
-      <Header/>
+      <Header history={props.history}/>
       <Container>
        {posts.map((item, index) => {
         return(
